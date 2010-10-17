@@ -1,6 +1,7 @@
 #include "llama.h"
 #include "llama-internal.h"
 #include <unistd.h>
+#include <sys/mman.h>
 
 static int permissions_to_prot(llama_permissions_t permissions)
 {
@@ -32,11 +33,14 @@ size_t llama_page_size(void)
 void* llama_allocate(unsigned pageCount, llama_permissions_t permissions,
                      llama_options_t options, void* fixedAddress)
 {
-	return NULL;
+	return mmap(fixedAddress, pageCount * llama_page_size(),
+	            permissions_to_prot(permissions), MAP_ANONYMOUS | MAP_PRIVATE,
+	            0, 0);
 }
 
 void llama_deallocate(void* base, unsigned pageCount)
 {
+	munmap(base, pageCount * llama_page_size());
 }
 
 bool llama_lock(void* base, unsigned pageCount)
