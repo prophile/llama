@@ -10,6 +10,14 @@ extern "C"
 {
 #endif
 
+#define LLAMA_VERSION_MAJOR 0
+#define LLAMA_VERSION_MINOR 0
+#define LLAMA_VERSION_PATCH 1
+
+int llama_version_major(void);
+int llama_version_minor(void);
+int llama_version_patch(void);
+
 typedef uint32_t llama_options_t;
 typedef uint8_t llama_permissions_t;
 
