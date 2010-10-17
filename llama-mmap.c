@@ -26,7 +26,7 @@ void llama_quit(void)
 
 llama_options_t llama_supported_options(void)
 {
-	return LLAMA_OPTION_NONE;
+	return LLAMA_OPTION_FIXED | LLAMA_OPTION_LOCK;
 }
 
 size_t llama_page_size(void)
