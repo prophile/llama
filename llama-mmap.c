@@ -49,11 +49,12 @@ void llama_deallocate(void* base, unsigned pageCount)
 
 bool llama_lock(void* base, unsigned pageCount)
 {
-	return false;
+	return mlock(base, pageCount) == 0;
 }
 
 void llama_unlock(void* base, unsigned pageCount)
 {
+	munlock(base, pageCount);
 }
 
 void llama_set_permissions(void* base, unsigned pageCount, llama_permissions_t newPermissions)
