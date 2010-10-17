@@ -3,6 +3,10 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
+#ifdef __APPLE__
+#define MAP_ANONYMOUS MAP_ANON
+#endif
+
 static int permissions_to_prot(llama_permissions_t permissions)
 {
 	int result = 0;
@@ -27,7 +31,7 @@ llama_options_t llama_supported_options(void)
 
 size_t llama_page_size(void)
 {
-	return MEMOISE(size_t, getpagesize());
+	MEMOISE(size_t, getpagesize());
 }
 
 void* llama_allocate(unsigned pageCount, llama_permissions_t permissions,
