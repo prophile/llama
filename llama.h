@@ -25,8 +25,8 @@ typedef uint8_t llama_permissions_t;
 void llama_init(void);
 void llama_quit(void);
 
-llama_options_t llama_supported_options();
-size_t llama_page_size();
+llama_options_t llama_supported_options(void);
+size_t llama_page_size(void);
 
 void* llama_allocate(unsigned pageCount, llama_permissions_t permissions,
                      llama_options_t options, void* fixedAddress);
