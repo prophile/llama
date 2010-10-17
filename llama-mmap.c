@@ -1,4 +1,15 @@
 #include "llama.h"
+#include "llama-internal.h"
+#include <unistd.h>
+
+static int permissions_to_prot(llama_permissions_t permissions)
+{
+	int result = 0;
+	if (permissions & LLAMA_PERMISSION_READ)  result |= PROT_READ;
+	if (permissions & LLAMA_PERMISSION_WRITE) result |= PROT_WRITE;
+	if (permissions & LLAMA_PERMISSION_EXEC)  result |= PROT_EXEC;
+	return result;
+}
 
 void llama_init(void)
 {
@@ -15,7 +26,7 @@ llama_options_t llama_supported_options(void)
 
 size_t llama_page_size(void)
 {
-	return 0;
+	return MEMOISE(size_t, getpagesize());
 }
 
 void* llama_allocate(unsigned pageCount, llama_permissions_t permissions,
