@@ -59,4 +59,5 @@ void llama_unlock(void* base, unsigned pageCount)
 
 void llama_set_permissions(void* base, unsigned pageCount, llama_permissions_t newPermissions)
 {
+	mprotect(base, pageCount * llama_page_size(), permissions_to_prot(newPermissions));
 }
