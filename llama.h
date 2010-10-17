@@ -23,7 +23,7 @@ typedef uint8_t llama_permissions_t;
 
 #define LLAMA_OPTION_NONE   0x00
 #define LLAMA_OPTION_FIXED  0x01
-#define LLAMA_OPTION_LOCKED 0x02
+#define LLAMA_OPTION_LOCK   0x02
 
 #define LLAMA_PERMISSION_NONE  0
 #define LLAMA_PERMISSION_READ  0x01
